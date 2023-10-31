@@ -25,9 +25,9 @@ class CharacterFactory extends Factory
 
             'title'=> $this->faker->sentence,
 
-            'excerpt'=> $this->faker->sentence,
+            'excerpt'=> '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
 
-            'body'=> $this->faker->paragraph
+            'body'=> '<p>' . implode('</p><p>', $this->faker->paragraphs(5)) . '</p>',
 
         ];
     }

@@ -6,40 +6,21 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 Route::get('/', function () {
     return view('home');
 
 })->name('home');
 
-Route::get('characters', function () {
-    return view('characters', [
-        'characters' => Character::latest()->get()
-    ]);
-});
+Route::get('characters', [CharacterController::class, 'index'])->name('characters');
 
 
-/*Route::get('test-character', function () {
-    dd(Characters::getCharacterDetails('gon'));
-});
+Route::get('characters/{character}', [CharacterController::class, 'show'])->name('character');
 
-*/
-
-Route::get('characters/{character}', function (Character $character) {
-
-
-    return view('character', [
-        'character' => $character
-    ]);
-
-});
-Route::get('categories/{category:slug}', function (Category $category) {
-    return view('characters', [
-        'characters' => $category->characters
-    ]);
-});
-Route::get('authors/{author:username}', function (User $author) {
-
-    return view('characters', [
-        'characters' => $author->characters
-    ]);
-});
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('login', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
+Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth');
