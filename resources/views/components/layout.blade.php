@@ -28,9 +28,7 @@
                     <a href="/login" class="text-xs font-bold uppercase ml-6">Log In</a>
                 @endauth
 
-                <a href="#" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
-                    Subscribe for Updates
-                </a>
+
             </div>
         </nav>
 
